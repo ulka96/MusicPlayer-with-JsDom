@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./style.css">
+
+</head>
+<body class="bg-black h-screen flex items-end text-white pb-16">
+<div class="container mx-auto">
+
+<!-- Name and Image -->
+<div class="flex gap-6 items-end mb-4">
+
+<!-- image -->
+<div>
+<img src="./assets/chopin.jpg" alt="" class="h-24 w-24" id="image">
+</div>
+
+<div class="flex flex-col gap-2">
+<!-- Name -->
+<h1 class="text-3xl font-bold" id="title">The_Pianist_Soundtrack_-_Nocturne</h1>
+<p class="text-xs text-gray-100" id="artist">Frédéric Chopin</p>
+</div>
+
+</div>
+<!-- Player, current time , duration -->
+<div class="flex items-center gap-2 font-bold mb-4">
+<div>
+    <span class="text-sm" id="currentTime">0:00</span>
+</div>
+<!-- Player -->
+<!-- Progress Container -->
+<div class="grow h-1 rounded bg-[#535353] relative" id="progress-container">
+
+<!-- Progress Element -->
+<div class="absolute h-full rounded bg-[#c4c4c4] w-1/2" id="progress"></div>
+
+</div>
+
+<!-- Duration -->
+<div>
+    <span class="text-sm" id="duration">4:27</span>
+</div>
+
+</div>
+
+<!-- Controllers -->
+<div class="flex items-center justify-between relative">
+
+<!-- Add to playlist button -->
+<div>
+    <button>
+        <img src="./assets/icons8-plus-64.png" alt="" class="h-6 w-6">
+    </button>
+</div>
+
+<!-- Controller -->
+<div class="items-center flex gap-5 absolute left-1/2 -translate-x-1/2">
+<button id="prev">
+    <img src="./assets/bx_bx-skip-previous.png" alt="" class="h-8 w-8">
+</button>
+
+<button id="play">
+ <img src="./assets/gridicons_play.png" alt="" class="w-12 h-12">
+</button>
+
+<button id="next">
+<img src="./assets/next.png" alt="" class="h-8 w-8">
+</button>
+
+</div>
+
+<!-- Volume, full screen -->
+<div class="flex items-center gap-4">
+
+    <!-- Volume -->
+<div class="flex items-center gap-1">
+   <!-- Volume icon -->
+<div>
+    <img src="./assets/fluent_speaker-2-24-regular.png" alt="" class="h-8 w-8">
+</div>
+
+<!-- Volume progress container -->
+<div class="bg-[#535353] h-1 w-28 rounded relative">
+
+<!-- Volume progress element -->
+<div class="absolute w-1/2 top-0 left-0 bg-white rounded"></div>
+
+</div>
+
+</div>
+
+<!-- Full screen button -->
+<div>
+<button>
+    <img src="./assets/tabler_arrows-diagonal (1).png" alt="" class="h-8 w-8">
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<audio src="./assets/Chopin_-_Chopin_-_The_Pianist_Soundtrack_-_Nocturne_in_c_sharp_minor_-_www.BiG.AZ.mp3"  id="song"></audio>
+
+<script src="./script.js"></script>
+</body>
+</html>
