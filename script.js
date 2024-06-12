@@ -60,6 +60,7 @@ duration: "3:36",
 ];
 
 let isPlaying = false;
+let songIndex = 0;
 
 const playSong = () => {
     songEl.play();
@@ -84,29 +85,40 @@ playBtn.addEventListener("click", () => {
     isPlaying ? pauseSong() : playSong();
 });
 
-songEl.addEventListener("timeupdate", function () {
-    // console.dir(event.target);
+songEl.addEventListener("timeupdate", (event) => {
+// console.dir(event.target);
 
-    // const duration = songEl.duration;
-    // const currentTime = songEl.currentTime;
+// const duration = songEl.duration;
+// const currentTime = songEl.currentTime;
 
-    // const{duration, currentTime} = songEl;            //yuxaridaki 2 setrin yerine object distraction-la bele yaziriq ve
-                                                          //bele yazanda yuxarida function yazmaya da bilirik (event) olur
-       const {duration, currentTime} = this;                      //arrow function olur
-       console.log(this);
+// const{duration, currentTime} = songEl;       //yuxaridaki 2 setrin yerine object distraction-la bele yaziriq ve
+                                                //bele yazanda yuxarida function yazmaya da bilirik (event) olur
+const {duration, currentTime} = event.target;                     //arrow function olur
+// console.log(duration, currentTime);
 
+const durationMinute = Math.floor(duration / 60);  //233/60= 3.88 // 3
+const durationSecond = Math.floor(duration % 60);    //233%60 = 53.11 // 53
+//    console.log(durationMinute, durationSecond);
 
-       const durationMinute = Math.floor(duration / 60);  //233/60= 3.88 // 3
-       const durationSecond = Math.floor(duration % 60);    //233%60 = 53.11 // 53
-    //    console.log(durationMinute, durationSecond);
+const currentTimeMinute = Math.floor(currentTime / 60);  //2.76443/60
+const currentTimeSecond = Math.floor(currentTime % 60);    //2.76443 % 60
 
-      const currentTimeMinute = Math.floor(currentTime / 60);  //233/60= 3.88 // 3
-      const currentTimeSecond = Math.floor(currentTime % 60);    //233%60 = 53.11 // 53
+durationEl.textContent = `${durationMinute} : ${String(durationSecond).padStart(2,0)}`
+currentTimeEl.textContent = `${currentTimeMinute} : ${String(currentTimeSecond).padStart(2,0)}`
 
+progressEl.style.width = `${(currentTime / duration) * 100}%`;
 
-       
-       durationEl.textContent = `${durationMinute} : ${String(durationSecond).padStart(2,0)}`
-       currentTimeEl.textContent = `${currentTimeMinute} : ${String(currentTimeSecond).padStart(2,0)}`
+// console.log((currentTime / duration) * 100);
 
 });
 
+nextBtn.addEventListener("click", () => {
+songIndex < fakeData.length - 1 ? songIndex++ : (songIndex = 0);
+// console.log(fakeData[songIndex].name);
+songEl.src = `./assets/${fakeData[songIndex].name}.mp3`;
+});
+
+prevBtn.addEventListener("click", () => {
+songIndex > 0 ? songIndex-- : (songIndex = fakeData.length - 1);
+console.log(songIndex);
+ });
