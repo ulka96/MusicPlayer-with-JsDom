@@ -52,7 +52,7 @@ duration: "4:25",
 name: "intizar",
  artist: "Elmira Rahimova",
 title: "Intizar",
-duration: "3:36",
+duration: "5:23",
 
 },
 
@@ -61,6 +61,8 @@ duration: "3:36",
 
 let isPlaying = false;
 let songIndex = 0;
+
+durationEl.textContent = `${fakeData[songIndex].duration}`;
 
 const playSong = () => {
     songEl.play();
@@ -94,6 +96,7 @@ songEl.addEventListener("timeupdate", (event) => {
 // const{duration, currentTime} = songEl;       //yuxaridaki 2 setrin yerine object distraction-la bele yaziriq ve
                                                 //bele yazanda yuxarida function yazmaya da bilirik (event) olur
 const {duration, currentTime} = event.target;                     //arrow function olur
+if(!duration) return;                  //duration NaN olmasin deye
 // console.log(duration, currentTime);
 
 const durationMinute = Math.floor(duration / 60);  //233/60= 3.88 // 3
@@ -115,10 +118,42 @@ progressEl.style.width = `${(currentTime / duration) * 100}%`;
 nextBtn.addEventListener("click", () => {
 songIndex < fakeData.length - 1 ? songIndex++ : (songIndex = 0);
 // console.log(fakeData[songIndex].name);
-songEl.src = `./songs/${fakeData[songIndex].name}.mp3`;
+displaySong();
+playSong();
+
 });
 
 prevBtn.addEventListener("click", () => {
 songIndex > 0 ? songIndex-- : (songIndex = fakeData.length - 1);
 console.log(songIndex);
+displaySong();
+playSong();
+
  });
+
+ const displaySong = () => {
+    songEl.src = `./songs/${fakeData[songIndex].name}.mp3`;
+    imageEl.src = `./assets/${fakeData[songIndex].name}.jpeg`;
+    artistEl.textContent = `${fakeData[songIndex].artist}`;
+    titleEl.textContent = `${fakeData[songIndex].title}`;
+ };
+
+ progressContainerEl.addEventListener("click", function (event) {
+//   console.log(event.target.getBoundingClientRect());      //progressin widthini, heightini, hundurluyunu gosterir
+//   console.log(event.offsetX, event.offsetY);          //kliklediyimiz hissenin width ve height gosterir
+ const {offsetX: clicked} = event;
+ const {width} = this.getBoundingClientRect();
+ console.log(clicked, width);              //kliklediyimiz hisseni ve widthi gosterir
+
+songEl.currentTime = (clicked / width) * songEl.duration;
+
+ });
+
+ const nextSong = () => {
+songIndex < fakeData.length - 1 ? songIndex++ : (songIndex = 0);
+displaySong();
+playSong();
+ };
+
+ songEl.addEventListener("ended", nextSong);
+ 
