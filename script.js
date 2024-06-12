@@ -115,7 +115,7 @@ progressEl.style.width = `${(currentTime / duration) * 100}%`;
 nextBtn.addEventListener("click", () => {
 songIndex < fakeData.length - 1 ? songIndex++ : (songIndex = 0);
 // console.log(fakeData[songIndex].name);
-songEl.src = `./assets/${fakeData[songIndex].name}.mp3`;
+songEl.src = `./songs/${fakeData[songIndex].name}.mp3`;
 });
 
 prevBtn.addEventListener("click", () => {
